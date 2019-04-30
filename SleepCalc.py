@@ -18,6 +18,12 @@ dbconn.close()
 
 print("Here is the Info: " + info[0][0])
 
+
+
+# TODO THIS IS A CODE FOR MARK TO REEEEEAAAAD
+
+
+
 # RecentDate = datetime.datetime.strptime("{0} {1}".format(info[0][0]))
 # print(RecentDate)
 RecentWakeTime = datetime.datetime.strptime("{0} {1}", "%m/%d/%Y %I:%M %p")#.format(info[0][0],info[0][1]))
