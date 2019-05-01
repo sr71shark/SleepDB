@@ -1,8 +1,7 @@
 import sqlite3
 import datetime
 
-dbconn = sqlite3.connect("/Users/mwhites/programming/python/SleepLog/sleep.db")
-#dbconn = sqlite3.connect('C:\Users\Andrew\Documents\Programming\Python\SleepDB\sleep.db')
+dbconn = sqlite3.connect('sleep.db')
 c = dbconn.cursor()
 
 c.execute('''SELECT Date, WakeTime, BedOut, BedTime, ApproximateSleepTime, 
@@ -22,24 +21,24 @@ PriorApproximateSleepTime = datetime.datetime.strptime("{0} {1}".format(info[1][
 def TimeInBedCalc(bt, bo):
     TimeInBed = bo - bt
     TimeInBed = str(TimeInBed)
-    print(TimeInBed[0:-3])
+    print("Time In Bed: {}".format(TimeInBed[0:-3]))
     return TimeInBed[0:-3]
 
 
 def TimeAsleepCalc(ast, wt, ea):
     TimeAsleep = (wt - ast) - datetime.timedelta(minutes = ea)
     TimeAsleep = str(TimeAsleep)
-    print(TimeAsleep[0:-3])
+    print("Time Asleep: {}".format(TimeAsleep[0:-3]))
     return TimeAsleep[0:-3]
 
 
 TimeInBedCalc(PriorBedTime, RecentBedOut)
 TimeAsleepCalc(PriorApproximateSleepTime, RecentWakeTime, RecentTotalEA)
 
-#x = TimeAsleepCalc(PriorApproximateSleepTime, RecentWakeTime, RecentTotalEA)
-#print("x=: " + x)
+c.execute("SELECT * FROM SleepCycle WHERE date='{0}'".format(RecentDate))
 
-c.execute("SELECT * FROM SleepCycle WHERE date={0}".format(RecentDate))
+
+# TODO Do something with this return variable
 newvar = c.fetchall()
-print(newvar)
+print(newvar[0])
 dbconn.close()
