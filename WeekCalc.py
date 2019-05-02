@@ -39,8 +39,10 @@ for i in range(0, len(info), 1):
     sht.range('{}15'.format(alpha[i])).value = info[i][15]
 if sys.platform == 'win32':
     wb.save(os.getcwd() + '\Excel-Files\{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+    wb.close()
 else:
     wb.save(os.getcwd() + '/Excel-Files/{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+    wb.close()
 # print(convertdatetoweekday(nf))
 # if convertdatetoweekday(nf) == "Wedneday":
 
