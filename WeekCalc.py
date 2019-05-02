@@ -11,7 +11,6 @@ info = c.fetchall()
 # print(info[0])
 wb = xw.Book('SleepDiaryTemplate.xlsx')
 sht = wb.sheets['Sheet1']
-sht.range('B1').value = "Mark is popooo . com"
 alpha = 'BCDEFGHIJKLMNOPQRSTUVWXYZ'
 def convertdatetoweekday(nf):
     year = int(nf[-4:])
