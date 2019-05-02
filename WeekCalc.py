@@ -18,10 +18,8 @@ def convertdatetoweekday(nf):
     month = int(nf[:2])
     day = int(nf[3:5])
     return datetime.date(year, month, day).strftime("%A")
-# print(info)
-# print(info[0][0])
 
-print os.getcwd()
+
 for i in range(0, len(info), 1):
     nf = str(info[i][0])
     sht.range('{}1'.format(alpha[i])).value = info[i][0]
@@ -45,6 +43,7 @@ else:
     wb.save(os.getcwd() + '/Excel-Files/{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
 # print(convertdatetoweekday(nf))
 # if convertdatetoweekday(nf) == "Wedneday":
+
 
 # print(nf)
 # print(nf[3:5])
