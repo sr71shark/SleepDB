@@ -41,7 +41,7 @@ try:
 except ValueError as e:
     print("Error found at:\t \033[91m{}\033[0m".format(e))
     print("Data missing from the database to do the calculations.")
-except Exception as e:
+except Exception:
     logging.basicConfig(level=logging.DEBUG, filename='errors.log')
     logging.exception("Exception Occurred:")
 
