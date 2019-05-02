@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 import sqlite3
 import datetime
 import xlwings as xw
@@ -8,10 +9,11 @@ c = dbconn.cursor()
 
 c.execute('''SELECT * FROM SleepCycle ORDER BY date DESC LIMIT 7''')
 info = c.fetchall()
-# print(info[0])
 wb = xw.Book('SleepDiaryTemplate.xlsx')
 sht = wb.sheets['Sheet1']
 alpha = 'BCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+
 def convertdatetoweekday(nf):
     year = int(nf[-4:])
     month = int(nf[:2])
@@ -37,11 +39,10 @@ for i in range(0, len(info), 1):
     sht.range('{}14'.format(alpha[i])).value = info[i][14]
     sht.range('{}15'.format(alpha[i])).value = info[i][15]
 if sys.platform == 'win32':
-    wb.save(os.getcwd() + '\Excel-Files\{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
-    wb.close()
+    wb.save(os.getcwd() + r'\Excel-Files\{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
 else:
     wb.save(os.getcwd() + '/Excel-Files/{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
-    wb.close()
+wb.close()
 # print(convertdatetoweekday(nf))
 # if convertdatetoweekday(nf) == "Wedneday":
 
