@@ -1,3 +1,4 @@
+import os, sys
 import sqlite3
 import datetime
 import xlwings as xw
@@ -5,10 +6,13 @@ import xlwings as xw
 dbconn = sqlite3.connect('sleep.db')
 c = dbconn.cursor()
 
-c.execute('''SELECT Date, WakeTime, BedOut, BedTime, ApproximateSleepTime, 
-             TotalEA FROM SleepCycle ORDER BY date DESC LIMIT 14''')
+c.execute('''SELECT * FROM SleepCycle ORDER BY date DESC LIMIT 7''')
 info = c.fetchall()
-
+# print(info[0])
+wb = xw.Book('SleepDiaryTemplate.xlsx')
+sht = wb.sheets['Sheet1']
+sht.range('B1').value = "Mark is popooo . com"
+alpha = 'BCDEFGHIJKLMNOPQRSTUVWXYZ'
 def convertdatetoweekday(nf):
     year = int(nf[-4:])
     month = int(nf[:2])
@@ -16,10 +20,31 @@ def convertdatetoweekday(nf):
     return datetime.date(year, month, day).strftime("%A")
 # print(info)
 # print(info[0][0])
+
+print os.getcwd()
 for i in range(0, len(info), 1):
     nf = str(info[i][0])
-    print(convertdatetoweekday(nf))
-    # if convertdatetoweekday(nf) == "Wedneday":
+    sht.range('{}1'.format(alpha[i])).value = info[i][0]
+    sht.range('{}2'.format(alpha[i])).value = info[i][8]
+    sht.range('{}3'.format(alpha[i])).value = info[i][9]
+    sht.range('{}4'.format(alpha[i])).value = info[i][10]
+    sht.range('{}5'.format(alpha[i])).value = info[i][11]
+    sht.range('{}6'.format(alpha[i])).value = info[i][12]
+    sht.range('{}7'.format(alpha[i])).value = info[i][13]
+    sht.range('{}8'.format(alpha[i])).value = info[i][14]
+    sht.range('{}9'.format(alpha[i])).value = info[i][3]
+    sht.range('{}10'.format(alpha[i])).value = info[i][4]
+    sht.range('{}11'.format(alpha[i])).value = info[i][5]
+    sht.range('{}12'.format(alpha[i])).value = info[i][6]
+    sht.range('{}13'.format(alpha[i])).value = info[i][7]
+    sht.range('{}14'.format(alpha[i])).value = info[i][14]
+    sht.range('{}15'.format(alpha[i])).value = info[i][15]
+if sys.platform == 'win32':
+    wb.save(os.getcwd() + '\Excel-Files\{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+else:
+    wb.save(os.getcwd() + '/Excel-Files/{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+# print(convertdatetoweekday(nf))
+# if convertdatetoweekday(nf) == "Wedneday":
 
 # print(nf)
 # print(nf[3:5])
