@@ -39,9 +39,9 @@ for i in range(0, len(info), 1):
     sht.range('{}14'.format(alpha[i])).value = info[i][14]
     sht.range('{}15'.format(alpha[i])).value = info[i][15]
 if sys.platform == 'win32':
-    wb.save(os.getcwd() + r'\Excel-Files\{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+    wb.save(os.getcwd() + r'\Excel-Files\{}.xlsx'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
 else:
-    wb.save(os.getcwd() + '/Excel-Files/{}'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
+    wb.save(os.getcwd() + '/Excel-Files/{}.xlsx'.format(datetime.datetime.now().strftime('%m-%d-%Y')))
 wb.close()
 # print(convertdatetoweekday(nf))
 # if convertdatetoweekday(nf) == "Wedneday":
